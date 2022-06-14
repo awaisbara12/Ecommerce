@@ -1,0 +1,5 @@
+<h1>New Product</h1>
+
+<%= render 'form', product: @product %>
+
+<%= link_to 'Back', products_path(:category_id => @product.category_id),class: "btn btn-primary" %>

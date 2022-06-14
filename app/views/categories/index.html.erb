@@ -1,0 +1,35 @@
+<div class="container-xl container-lg container-md container-sm">
+  <h1>Categories</h1>
+  <% if user_signed_in? %>
+    <% if current_user.role =="admin"%>
+      <%= link_to 'New Category', new_category_path, class: "btn btn-primary"  %>
+    <% end %>
+  <% end %>
+  <div class="row py-3">
+    <% @categories.each do |category| %>
+      <div class="col-md-4 py-2">
+          <div class="card">
+              <% if category.avatar.attached?%>
+                <%= image_tag category.avatar, width: "100px" %>
+              <%end%>
+              
+              <div class="card-body">
+                  <h5 class="card-title"><%= category.Type %></h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                      the card's content.</p>
+                  <%= link_to 'View Products', products_path(:category_id => category.id), class: "btn btn-primary"%>
+                  <br>
+                  <br>
+                  <% if user_signed_in? %>
+                    <% if current_user.role =="admin"%>
+                      <%= link_to 'Show', category, class: "btn btn-primary" %>
+                      <%= link_to 'Edit', edit_category_path(category), class: "btn btn-primary" %>
+                      <%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+                    <% end %>
+                  <% end %>
+              </div>
+          </div>
+      </div>
+    <% end %>
+  </div>
+</div>
