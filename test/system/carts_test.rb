@@ -14,11 +14,6 @@ class CartsTest < ApplicationSystemTestCase
     visit carts_url
     click_on "New Cart"
 
-    fill_in "Category", with: @cart.category_id
-    fill_in "Product", with: @cart.product_id
-    fill_in "Quantity", with: @cart.quantity
-    fill_in "Total price", with: @cart.total_price
-    fill_in "User", with: @cart.user_id
     click_on "Create Cart"
 
     assert_text "Cart was successfully created"
@@ -29,11 +24,6 @@ class CartsTest < ApplicationSystemTestCase
     visit carts_url
     click_on "Edit", match: :first
 
-    fill_in "Category", with: @cart.category_id
-    fill_in "Product", with: @cart.product_id
-    fill_in "Quantity", with: @cart.quantity
-    fill_in "Total price", with: @cart.total_price
-    fill_in "User", with: @cart.user_id
     click_on "Update Cart"
 
     assert_text "Cart was successfully updated"

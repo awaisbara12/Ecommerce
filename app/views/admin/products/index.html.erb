@@ -1,0 +1,44 @@
+<div class="container-xl container-lg container-md container-sm">
+  <h1>Products</h1>
+  <%= link_to("< Back to Categories", admin_categories_path,class: "btn btn-primary") %>
+  <br>
+  <br>
+  <% if user_signed_in? %>
+    <% if current_user.role =="admin"%>
+      <%= link_to 'Add New Product', new_admin_product_path(:category_id => @category.id),class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+
+  <div class="row py-3">
+    <% @products.each do |product| %>
+      <div class="col-md-4 py-2">
+          <div class="card">
+              <% if product.avatar.attached?%>
+                <%= image_tag product.avatar, width: "100px" %>
+              <%end%>
+            
+              <div class="card-body">
+                  <h5 class="card-title"><%= product.product_name %></h5>
+                  <p class="card-text">
+                    Price : 
+                    <%= product.Price %>
+                    <br>
+                    Discription :
+                    <%= product.Discription %>
+                  </p>
+                  <%= link_to 'Add to Cart', add_to_cart_path(product.id), method: :post, class: "btn btn-primary" %>
+                  <br>
+                  <br>
+                  <% if user_signed_in? %>
+                    <% if current_user.role =="admin"%>
+                      <%= link_to 'Show', [:admin, product],class: "btn btn-primary" %>
+                      <%= link_to 'Edit', edit_admin_product_path(product),class: "btn btn-primary" %>
+                      <%= link_to 'Destroy', [:admin, product], method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-primary" %>
+                    <% end %>
+                  <% end %>
+              </div>
+          </div>
+      </div>
+    <% end %>
+    </div>
+</div>

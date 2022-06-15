@@ -1,0 +1,6 @@
+<h1>Editing Product</h1>
+
+<%= render 'form', product: @product %>
+
+<%= link_to 'Show', @product ,class: "btn btn-primary"%>
+<%= link_to 'Back', admin_products_path(:category_id => @product.category_id),class: "btn btn-primary" %>

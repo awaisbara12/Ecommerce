@@ -1,0 +1,18 @@
+<h1>Users</h1>
+<table class="table table-striped table-hover">
+  <tr class="header">
+  <th>Roles</th>
+  <th>Email</th>
+  <th>Actions</th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.role %></td>
+      <td><%= user.email %></td>
+      <td class="actions">
+      <%= link_to 'Edit', edit_user_registration_path(user), class: "btn btn-primary" %>
+      <%= link_to "Delete", registration_path(user), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-primary" %>
+      </td>
+    </tr>
+  <% end %>
+</table>

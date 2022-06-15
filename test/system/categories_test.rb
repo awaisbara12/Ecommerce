@@ -14,7 +14,6 @@ class CategoriesTest < ApplicationSystemTestCase
     visit categories_url
     click_on "New Category"
 
-    fill_in "Type", with: @category.Type
     click_on "Create Category"
 
     assert_text "Category was successfully created"
@@ -25,7 +24,6 @@ class CategoriesTest < ApplicationSystemTestCase
     visit categories_url
     click_on "Edit", match: :first
 
-    fill_in "Type", with: @category.Type
     click_on "Update Category"
 
     assert_text "Category was successfully updated"
