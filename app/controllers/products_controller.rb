@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy add_to_cart]
   before_action :find_category
-  before_action :initialize_cart
   # before_action :authenticate_user!
 
   # GET /products or /products.json
@@ -13,10 +12,6 @@ class ProductsController < ApplicationController
 
   # GET /products/1 or /products/1.json
   def show
-  end
-
-  def initialize_cart
-    session[:cart] ||=[]
   end
 
   # GET /products/new
@@ -93,7 +88,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  private
+private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])

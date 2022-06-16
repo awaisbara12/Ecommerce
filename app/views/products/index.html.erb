@@ -28,6 +28,7 @@
                     <%= product.Discription %>
                   </p>
                   <%= link_to 'Add to Cart', add_to_cart_path(product.id), method: :post, class: "btn btn-primary" %>
+                  <%= link_to 'Order Product', new_order_path(:product_id => product.id), class: "btn btn-primary" %>
                   <br>
                   <br>
                   <% if user_signed_in? %>

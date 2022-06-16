@@ -1,0 +1,63 @@
+<% link_to 'New Order', new_order_path %>
+
+
+<div class="container-xl container-lg container-md container-sm">
+<h1>Orders</h1>
+<p id="notice"><%= notice %></p>
+<%= link_to("< Back to Categories", {:controller => 'categories',:action => 'index'},class: "btn btn-primary") %>
+<% @count=0 %>
+<% @orders.each do |order| %>
+  <% @count=@count+1 %>
+<%end%>
+<h2>Total Orders : <%= @count %></h2>
+<div class="row py-3">
+    <% @orders.each do |order| %>
+      <% @product = Product.find(order.product_id) %>
+      
+      <div class="col-md-4 py-3">
+        <div class="card">
+          <% if @product.avatar.attached?%>
+            <%= image_tag @product.avatar , width: "200px" %>
+          <%end%>
+              <div class="card-body">
+                  <h5 class="card-title"><%= @product.product_name %></h5>
+                  <p class="card-text">
+                    Price : 
+                    <%= @product.Price %> | 
+                    Total Price : 
+                    <%= order.quantity*@product.Price %>
+                    <br>
+                    User Mail: 
+                    <%= order.email %>
+                    <br>
+                    Discription : 
+                    <%= @product.Discription %>
+                    <br>
+                    Address : 
+                    <%= order.address %>
+                    <br>
+                    Quantity : 
+                    <%= order.quantity %>
+                    <br>
+                    Order Status : 
+                    <% if order.status==false %>
+                      <%= "Not Confirmed by Admin so you can cancel" %>
+                    <%else%>
+                      <%= "Confirmed by Admin so you cannot now cancel" %>
+                    <%end%>
+                  </p>
+                    <% if order.status==false %>
+                      <td><%= link_to 'Cancel Order', order, method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-primary"%></td>
+                    <%end%>
+                    <% if user_signed_in? %>
+                      <% if current_user.role =="admin"%>
+                        <%= link_to 'Edit', edit_order_path(order),class: "btn btn-primary"%> 
+                      <%end%>
+                    <%end%>
+              </div>
+          </div>
+      </div>
+    <% end %>
+    </div>
+</div>
+

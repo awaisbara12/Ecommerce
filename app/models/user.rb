@@ -8,4 +8,5 @@ class User < ApplicationRecord
   enum role: {"admin" => "admin", "user" => "user"}
 
   has_many :carts
+  has_many :orders
 end

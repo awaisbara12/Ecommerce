@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_15_105241) do
+ActiveRecord::Schema.define(version: 2022_06_16_075022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,25 @@ ActiveRecord::Schema.define(version: 2022_06_15_105241) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.string "address"
+    t.string "email"
+    t.integer "price"
+    t.integer "quantity"
+    t.boolean "status", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders_products", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "product_id", null: false
+    t.index ["order_id"], name: "index_orders_products_on_order_id"
+    t.index ["product_id"], name: "index_orders_products_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.integer "category_id"
     t.string "product_name"
@@ -60,7 +79,6 @@ ActiveRecord::Schema.define(version: 2022_06_15_105241) do
     t.string "Discription"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "id_id"
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
@@ -78,4 +96,6 @@ ActiveRecord::Schema.define(version: 2022_06_15_105241) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "orders_products", "orders"
+  add_foreign_key "orders_products", "products"
 end

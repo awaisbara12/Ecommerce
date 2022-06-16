@@ -11,14 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :Type %>
-    <%= form.text_field :Type %>
-  </div>
 
-  <div class="field">
-    <%= form.label :avatar %>
-    <%= form.file_field :avatar %>
+  <div class="mb-3">
+    <%= form.label :Type,class: "form-label" %>
+    <%= form.text_field :Type ,class: "form-control"%>
+  </div>
+  
+  <div class="mb-3">
+    <%= form.label :avatar , class: "form-label" %>
+    <%= form.file_field :avatar ,class: "form-control"%>
   </div>
 
   <div class="actions">

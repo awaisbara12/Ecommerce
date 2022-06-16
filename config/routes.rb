@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :orders
   resources :carts
   resources :products
   post 'products/add_to_cart/:id', to: 'products#add_to_cart', as: 'add_to_cart'
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
       match ':controller(/:action(/:id))', :via => [:get, :post]  
     end
   end
+
   resources :categories
 
   devise_for :users
