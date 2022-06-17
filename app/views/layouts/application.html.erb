@@ -13,7 +13,11 @@
 
   <body>
   
-    <%= render 'shared/navbar' %>
+      <%if user_signed_in? && current_user.role=="admin" %>
+        <%= render 'shared/navbarAdmin' %>
+      <%else%>
+        <%= render 'shared/navbarUser' %>
+      <%end%>
     
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

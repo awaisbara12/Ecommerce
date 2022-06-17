@@ -11,6 +11,16 @@
     </div>
   <% end %>
 
+  <div class="mb-3">
+    <h5><%= form.label :email,class: "form-label" %></h5><br />
+    <%= form.email_field :email, autofocus: true, autocomplete: "email",class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <h5><%= form.label :role,class: "form-label" %></h5><br />
+    <%= form.select :role,User.roles.keys,class: "form-control" %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

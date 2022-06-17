@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+    get 'admin_home/home'
+  end
   resources :orders
   resources :carts
   resources :products
@@ -16,10 +19,13 @@ Rails.application.routes.draw do
   root to: "categories#index"
 
 
+  
   namespace :admin do
     resources :categories
+    
     resources :users
     resources :products
+    resources :carts 
   end
 
   # resources :users

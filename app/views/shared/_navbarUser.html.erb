@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary bg-gradient px-4 rounded">
+  <a class="navbar-brand" href="/">Ecommerce</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto align-items-center">
+        <%if user_signed_in? %>
+            <li class="nav-item px-1">
+            <%= link_to 'SignOut', destroy_user_session_path,method: :delete, class: "navbar-brand" %>
+            </li>
+        <%else %>
+            <li class="nav-item px-1">
+                <%= link_to 'Register', new_user_registration_path,  class: "navbar-brand" %>
+            </li>
+            <li class="nav-item px-1">
+            <%= link_to 'SignIn', new_user_session_path,  class: "navbar-brand" %>
+            </li>
+        <% end %>
+        <%if user_signed_in? %>
+          <li class="nav-item px-1">
+              <%= link_to 'Cart', carts_path(:user_id=>current_user.id),  class: "navbar-brand"%>
+          </li>
+        <% end %>
+        <%if user_signed_in? %>
+          <li class="nav-item px-1">
+              <%= link_to 'OrderItem', orders_path(:user_id=>current_user.id),  class: "navbar-brand"%>
+          </li>
+        <% end %>
+    </ul>
+  </div>
+</nav>

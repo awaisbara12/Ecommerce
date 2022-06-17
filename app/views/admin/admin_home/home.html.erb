@@ -1,0 +1,24 @@
+<div class="container-xl container-lg container-md container-sm text-center">
+    <h1>Admin Home </h1>
+    </br>
+    <h2>Admin Email : <%=current_user.email%></h2>
+    
+    <div class="row ">
+      <div class="alert alert-primary text-center" role="alert">
+        <h2><%= link_to 'View Users', admin_users_path,class: "alert-primary"%></h2>
+      </div>
+
+      <div class="alert alert-primary text-center" role="alert">
+        <h2><%= link_to 'View categories', admin_categories_path ,class: "alert-primary"%></h2>
+      </div>
+
+      <div class="alert alert-primary text-center" role="alert">
+        <h2><%= link_to 'View Carts', admin_carts_path ,class: "alert-primary"%></h2>
+      </div>
+
+      <div class="alert alert-primary text-center" role="alert">
+        <h2><%= link_to 'View Orders', admin_carts_path ,class: "alert-primary"%></h2>
+      </div>
+
+    </div>
+</div>
