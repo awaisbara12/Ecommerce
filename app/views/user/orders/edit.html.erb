@@ -1,0 +1,9 @@
+<div class="container">
+    <h1>Editing Order</h1>
+
+    <%= link_to '< Back to Categories', user_categories_path, class: "btn btn-primary"  %>
+    <%= render 'form', order: @order %>
+
+    <%= link_to 'Show',[:user, @order], class: "btn btn-primary" %>
+</div>
+

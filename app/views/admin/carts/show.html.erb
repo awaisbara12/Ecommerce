@@ -1,4 +1,33 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_cart_path(@cart) %> |
-<%= link_to 'Back', admin_carts_path %>
+  <% @product = Product.find(@cart.product_id) %>
+  <br>
+  <% @user = User.find(@cart.user_id) %>
+
+  <div class="col-md-4">
+    <div class="card">
+    <% if @product.avatar.attached?%>
+    <%= image_tag @product.avatar , width: "200px" %>
+    <%end%>
+        <div class="card-body">
+            <h5 class="card-title"><%= @product.product_name %></h5>
+            <p class="card-text">
+              Card added by user(email):
+              <%= @user.email %>
+              <br>
+              Price : 
+              <%= @product.Price %>
+              <br>
+              Discription : 
+              <%= @product.Discription %>
+              <br>
+              Quantity:
+              <%= @cart.quantity %>
+            </p>
+            <%= link_to 'Edit', edit_admin_cart_path(@cart) ,class: "btn btn-primary" %>
+            <%= link_to 'Back', admin_carts_path,class: "btn btn-primary" %>
+        </div>
+    </div>
+  </div>
+</div>

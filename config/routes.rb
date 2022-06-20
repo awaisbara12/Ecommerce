@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :carts
   resources :products
   post 'products/add_to_cart/:id', to: 'products#add_to_cart', as: 'add_to_cart'
+  post 'user/products/add_to_cart/:id', to: 'user/products#add_to_cart', as: 'user_add_to_cart'
   resources :products do
     member do
       match ':controller(/:action(/:id))', :via => [:get, :post]  
@@ -16,16 +17,23 @@ Rails.application.routes.draw do
   resources :categories
 
   devise_for :users
-  root to: "categories#index"
+  root to: "user/categories#index"
 
 
   
   namespace :admin do
     resources :categories
-    
+    resources :orders
     resources :users
     resources :products
     resources :carts 
+  end
+
+  namespace :user do
+    resources :categories
+    resources :products
+    resources :carts 
+    resources :orders
   end
 
   # resources :users

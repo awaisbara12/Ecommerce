@@ -65,6 +65,6 @@ class Admin::CartsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def cart_params
-      params.fetch(:cart, {})
+      params.fetch(:cart, {}).permit(:user_id, :product_id, :category_id, :quantity, :total_price)
     end
 end

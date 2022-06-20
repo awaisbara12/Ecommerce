@@ -1,0 +1,25 @@
+<div class="container-xl container-lg container-md container-sm">
+  <p id="notice"><%= notice %></p>
+  <h1>Categories</h1>
+  
+  <div class="row py-3">
+    <% @categories.each do |category| %>
+      <div class="col-md-4 py-2">
+          <div class="card">
+              <% if category.avatar.attached?%>
+                <%= image_tag category.avatar, width: "100px" %>
+              <%end%>
+              
+              <div class="card-body">
+                  <h5 class="card-title"><%= category.Type %></h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                      the card's content.</p>
+                  <%= link_to 'View Products', user_products_path(:category_id => category.id), class: "btn btn-primary"%>
+                  
+                  <%= link_to 'Show', [:user, category], class: "btn btn-primary" %>
+              </div>
+          </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,12 +1,12 @@
 <div class="container-xl container-lg container-md container-sm">
-<h1>Carts</h1>
-<%= link_to("< Back to Categories", {:controller => 'categories',:action => 'index'},class: "btn btn-primary") %>
-<% @count=0 %>
-<% @carts.each do |cart| %>
-  <% @count=@count+1 %>
-<%end%>
-<h2>Total Carts : <%= @count %></h2>
-<div class="row py-3">
+  <h1>Carts</h1>
+  <%= link_to("< Back to Categories", {:controller => 'categories',:action => 'index'},class: "btn btn-primary") %>
+  <% @count=0 %>
+  <% @carts.each do |cart| %>
+    <% @count=@count+1 %>
+  <%end%>
+  <h2>Total Carts : <%= @count %></h2>
+  <div class="row py-3">
     <% @carts.each do |cart| %>
       <% @product = Product.find(cart.product_id) %>
       
@@ -15,20 +15,20 @@
           <% if @product.avatar.attached?%>
             <%= image_tag @product.avatar , width: "200px" %>
           <%end%>
-              <div class="card-body">
-                  <h5 class="card-title"><%= @product.product_name %></h5>
-                  <p class="card-text">
-                    Price : 
-                    <%= @product.Price %>
-                    <br>
-                    Discription : 
-                    <%= @product.Discription %>
-                  </p>
-                    <%= link_to 'Destroy', cart, method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-primary"%>
-                    <%= link_to 'Order Product', new_order_path(:product_id => @product.id), class: "btn btn-primary" %>
-              </div>
-          </div>
+            <div class="card-body">
+                <h5 class="card-title"><%= @product.product_name %></h5>
+                <p class="card-text">
+                  Price : 
+                  <%= @product.Price %>
+                  <br>
+                  Discription : 
+                  <%= @product.Discription %>
+                </p>
+                  <%= link_to 'Destroy', cart, method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-primary"%>
+                  <%= link_to 'Order Product', new_order_path(:product_id => @product.id), class: "btn btn-primary" %>
+            </div>
+        </div>
       </div>
     <% end %>
-    </div>
+  </div>
 </div>

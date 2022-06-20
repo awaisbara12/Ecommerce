@@ -1,5 +1,6 @@
 <div class="container-xl container-lg container-md container-sm">
-  <h1>Products</h1>
+  <% @category= Category.find(params[:category_id])%>
+  <h1><%=@category.Type+"  "%>Products</h1>
   <%= link_to("< Back to Categories", admin_categories_path,class: "btn btn-primary") %>
   <br>
   <br>

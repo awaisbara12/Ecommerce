@@ -1,6 +1,8 @@
-<h1>Editing Cart</h1>
+<div class="container">
+    <h1>Editing Cart</h1>
 
-<%= render 'form', cart: @cart %>
+    <%= render 'form', cart: @cart %>
 
-<%= link_to 'Show', @cart %> |
-<%= link_to 'Back', admin_carts_path %>
+    <%= link_to 'Show', [:admin, @cart] ,class: "btn btn-primary" %> |
+    <%= link_to 'Back', admin_carts_path,class: "btn btn-primary"  %>
+</div>

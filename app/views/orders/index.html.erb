@@ -2,15 +2,15 @@
 
 
 <div class="container-xl container-lg container-md container-sm">
-<h1>Orders</h1>
-<p id="notice"><%= notice %></p>
-<%= link_to("< Back to Categories", {:controller => 'categories',:action => 'index'},class: "btn btn-primary") %>
-<% @count=0 %>
-<% @orders.each do |order| %>
-  <% @count=@count+1 %>
-<%end%>
-<h2>Total Orders : <%= @count %></h2>
-<div class="row py-3">
+  <h1>Orders</h1>
+  <p id="notice"><%= notice %></p>
+  <%= link_to("< Back to Categories", {:controller => 'categories',:action => 'index'},class: "btn btn-primary") %>
+  <% @count=0 %>
+  <% @orders.each do |order| %>
+    <% @count=@count+1 %>
+  <%end%>
+  <h2>Total Orders : <%= @count %></h2>
+  <div class="row py-3">
     <% @orders.each do |order| %>
       <% @product = Product.find(order.product_id) %>
       
@@ -23,28 +23,28 @@
                   <h5 class="card-title"><%= @product.product_name %></h5>
                   <p class="card-text">
                     Price : 
-                    <%= @product.Price %> | 
-                    Total Price : 
-                    <%= order.quantity*@product.Price %>
+                      <%= @product.Price %> | 
+                        Total Price : 
+                          <%= order.quantity*@product.Price %>
                     <br>
-                    User Mail: 
-                    <%= order.email %>
+                      User Mail: 
+                        <%= order.email %>
                     <br>
-                    Discription : 
-                    <%= @product.Discription %>
+                      Discription : 
+                        <%= @product.Discription %>
                     <br>
-                    Address : 
-                    <%= order.address %>
+                      Address : 
+                        <%= order.address %>
                     <br>
-                    Quantity : 
-                    <%= order.quantity %>
+                      Quantity : 
+                        <%= order.quantity %>
                     <br>
-                    Order Status : 
-                    <% if order.status==false %>
-                      <%= "Not Confirmed by Admin so you can cancel" %>
-                    <%else%>
-                      <%= "Confirmed by Admin so you cannot now cancel" %>
-                    <%end%>
+                      Order Status : 
+                        <% if order.status==false %>
+                          <%= "Not Confirmed by Admin so you can cancel" %>
+                        <%else%>
+                          <%= "Confirmed by Admin so you cannot now cancel" %>
+                        <%end%>
                   </p>
                     <% if order.status==false %>
                       <td><%= link_to 'Cancel Order', order, method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-primary"%></td>
@@ -58,6 +58,6 @@
           </div>
       </div>
     <% end %>
-    </div>
+  </div>
 </div>
 

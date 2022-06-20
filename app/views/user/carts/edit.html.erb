@@ -1,0 +1,8 @@
+<div class="container">
+    <h1>Editing Cart</h1>
+
+    <%= render 'form', cart: @cart %>
+
+    <%= link_to 'Show', [:user, @cart] %> |
+    <%= link_to 'Back', user_carts_path %>
+</div>

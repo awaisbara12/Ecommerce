@@ -1,6 +1,7 @@
 <div class="container">
-    <h1>Editing Product</h1>
-
+    
+    <% @category= Category.find(params[:category_id])%>
+    <h1>Editing<%=" "+@category.Type+"  "%>Products</h1>
     <%= render 'form', product: @product %>
 
     <%= link_to 'Show', @product ,class: "btn btn-primary"%>

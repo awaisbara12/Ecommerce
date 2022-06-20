@@ -1,25 +1,27 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
-<%= link_to '< Admin Home', admin_admin_home_home_path ,class: "btn btn-primary"%>
-</br>
-</br>
-<table class="table table-striped table-hover">
-  <tr class="header">
-  <th>Roles</th>
-  <th>Email</th>
-  <th>Actions</th>
-  </tr>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= user.role %></td>
-      <td><%= user.email %></td>
-      <td class="actions">
-        <%= link_to 'Show', [:admin, user] , class: "btn btn-primary"%>
-        <%= link_to 'Edit', edit_admin_user_path(user) , class: "btn btn-primary"%>
-        <%= link_to 'Destroy', [:admin, user], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
-      </td>
+  <h1>Users</h1>
+  <%= link_to '< Admin Home', admin_admin_home_home_path ,class: "btn btn-primary"%>
+  </br>
+  </br>
+  <table class="table table-striped table-hover">
+    <tr class="header">
+    <th>Roles</th>
+    <th>Email</th>
+    <th>Actions</th>
     </tr>
-  <% end %>
-</table>
-<br>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.role %></td>
+        <td><%= user.email %></td>
+        <td class="actions">
+          <%= link_to 'Show', [:admin, user] , class: "btn btn-primary"%>
+          <%= link_to 'Edit', edit_admin_user_path(user) , class: "btn btn-primary"%>
+          <%= link_to 'Destroy', [:admin, user], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <br>
+</div>
