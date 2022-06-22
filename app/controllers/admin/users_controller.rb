@@ -40,9 +40,11 @@ class Admin::UsersController < ApplicationController
       if @user.update(user_params)
         format.html { redirect_to admin_user_url(@user), notice: "User was successfully updated." }
         format.json { render :show, status: :ok, location: @user }
+        format.js
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -54,6 +56,7 @@ class Admin::UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to admin_users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
+      format.js
     end
   end
 

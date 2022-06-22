@@ -1,0 +1,6 @@
+<% if @category.errors.any? %>
+    alert('Invalid');
+<% else %>
+    $("#CategoryIndex").prepend("<%= escape_javascript(render 'category_row', category: @category)%>");
+    $(".close-modal").click();
+<%end%>

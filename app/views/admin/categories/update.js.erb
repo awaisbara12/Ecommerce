@@ -1,0 +1,6 @@
+<% if @category.errors.any? %>
+    $("#errorArea").html("<%= escape_javascript(render 'error', category: @category)%>");
+<% else %>
+    $("#CategoryRow_<%=@category.id%>").replaceWith("<%= escape_javascript(render 'category_row', category: @category)%>");
+    $(".close-modal").click();
+<%end%>

@@ -3,7 +3,7 @@ class Admin::CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.order(created_at: :desc)
   end
 
   # GET /categories/1 or /categories/1.json
@@ -27,9 +27,11 @@ class Admin::CategoriesController < ApplicationController
       if @category.save
         format.html { redirect_to admin_category_url(@category), notice: "Category was successfully created." }
         format.json { render :show, status: :created, location: @category }
+        format.js
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -40,9 +42,11 @@ class Admin::CategoriesController < ApplicationController
       if @category.update(category_params)
         format.html { redirect_to admin_category_url(@category), notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @category }
+        format.js
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -54,6 +58,7 @@ class Admin::CategoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to admin_categories_url, notice: "Category was successfully destroyed." }
       format.json { head :no_content }
+      format.js
     end
   end
 
