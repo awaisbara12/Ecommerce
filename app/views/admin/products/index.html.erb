@@ -6,40 +6,58 @@
   <br>
   <% if user_signed_in? %>
     <% if current_user.role =="admin"%>
-      <%= link_to 'Add New Product', new_admin_product_path(:category_id => @category.id),class: "btn btn-primary" %>
+      <%= link_to 'Add New Product', new_admin_product_path(:category_id => @category.id), class: "btn btn-primary" , data: { bs_toggle: 'modal', bs_target: '#newProductModal', remote: true} %>
     <% end %>
   <% end %>
 
-  <div class="row py-3">
+  <div class="row py-3" id="ProductIndex">
     <% @products.each do |product| %>
-      <div class="col-md-4 py-2">
-          <div class="card">
-              <% if product.avatar.attached?%>
-                <%= image_tag product.avatar, width: "100px" %>
-              <%end%>
-            
-              <div class="card-body">
-                  <h5 class="card-title"><%= product.product_name %></h5>
-                  <p class="card-text">
-                    Price : 
-                    <%= product.Price %>
-                    <br>
-                    Discription :
-                    <%= product.Discription %>
-                  </p>
-                  <%= link_to 'Add to Cart', add_to_cart_path(product.id), method: :post, class: "btn btn-primary" %>
-                  <br>
-                  <br>
-                  <% if user_signed_in? %>
-                    <% if current_user.role =="admin"%>
-                      <%= link_to 'Show', [:admin, product],class: "btn btn-primary" %>
-                      <%= link_to 'Edit', edit_admin_product_path(product),class: "btn btn-primary" %>
-                      <%= link_to 'Destroy', [:admin, product], method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-primary" %>
-                    <% end %>
-                  <% end %>
-              </div>
-          </div>
-      </div>
+      <%= render 'product_row', product: product %>
     <% end %>
     </div>
+</div>
+
+
+<div class="modal fade" id="newProductModal" tabindex="-1" aria-labelledby="newProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newProductModalLabel">Add New Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div id="newProductForm">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editProductModalLabel">Update Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div id="editProductForm">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="showProductModal" tabindex="-1" aria-labelledby="showProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="showProductModalLabel">Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div id="showProductDetails">
+      </div>
+    </div>
+  </div>
 </div>

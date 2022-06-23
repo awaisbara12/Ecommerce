@@ -1,0 +1,23 @@
+<div class="modal-body">
+  <div class="col-md-12">
+    <div class="card">
+    <% if @product.avatar.attached?%>
+      <%= image_tag @product.avatar , width: "200px" %>
+    <%end%>
+      <div class="card-body">
+        <h5 class="card-title"><%= @product.product_name %></h5>
+        <p class="card-text">
+          Price : 
+          <%= @product.Price %>
+          <br>
+          Discription : 
+          <%= @product.Discription %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger close-modal" data-bs-dismiss="modal">Close</button>
+</div>

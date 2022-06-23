@@ -1,0 +1,6 @@
+<% if @product.errors.any? %>
+    alert("Invalid");
+<% else %>
+    $("#ProductRow_<%=@product.id%>").replaceWith("<%= escape_javascript(render 'product_row', product: @product)%>");
+    $(".close-modal").click();
+<%end%>

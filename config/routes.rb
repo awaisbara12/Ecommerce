@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :products
   post 'products/add_to_cart/:id', to: 'products#add_to_cart', as: 'add_to_cart'
   post 'user/products/add_to_cart/:id', to: 'user/products#add_to_cart', as: 'user_add_to_cart'
+  post 'admin/products/add_to_cart/:id', to: 'admin/products#add_to_cart', as: 'admin_add_to_cart'
   resources :products do
     member do
       match ':controller(/:action(/:id))', :via => [:get, :post]  

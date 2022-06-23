@@ -7,6 +7,6 @@ class User < ApplicationRecord
 
   enum role: {"admin" => "admin", "user" => "user"}
 
-  has_many :carts
-  has_many :orders
+  has_many :carts, dependent: :delete_all
+  has_many :orders, dependent: :delete_all
 end
