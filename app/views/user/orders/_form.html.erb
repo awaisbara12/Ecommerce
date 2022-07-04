@@ -10,6 +10,8 @@
       </ul>
     </div>
   <% end %>
+  
+  <% @product = Product.find(params[:product_id]) %>
 
   <div class="mb-3">
     <%= form.label :user_id ,class: "form-label"%>
@@ -20,6 +22,17 @@
     <%= form.label :product_id ,class: "form-label"%>
     <%= form.number_field :product_id ,class: "form-control"%>
   </div>
+
+  <% if @product.ren_order == "rent" %>
+    <div class="mb-3">
+      <%= form.label :rentstarted,class: "form-label" %>
+      <%= form.datetime_field :rentstarted ,class: "form-control"%>
+    </div>
+    <div class="mb-3">
+      <%= form.label :rentended,class: "form-label" %>
+      <%= form.datetime_field :rentended ,class: "form-control"%>
+    </div>
+  <% end %>
 
   <div class="mb-3">
     <%= form.label :address,class: "form-label" %>
@@ -39,8 +52,10 @@
   <div class="mb-3">
     <%= form.label :quantity,class: "form-label" %>
     <%= form.number_field :quantity,class: "form-control" %>
+
   </div>
 
+  
   <% if user_signed_in? %>
     <% if current_user.role =="admin"%>
       <div class="mb-3">
@@ -54,3 +69,5 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+

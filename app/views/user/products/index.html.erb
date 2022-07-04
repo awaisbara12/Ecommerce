@@ -19,9 +19,16 @@
                     <br>
                     Discription :
                     <%= product.Discription %>
+                    <br>
+                    Rented or Order (Status) :
+                    <%= product.ren_order %>
                   </p>
                   <%= link_to 'Add to Cart', user_add_to_cart_path(product.id), method: :post, class: "btn btn-primary" %>
-                  <%= link_to 'Order Product', new_user_order_path(:product_id => product.id), class: "btn btn-primary" %>
+                  <% if product.ren_order == "orders" %>
+                    <%= link_to 'Order Product', new_user_order_path(:product_id => product.id), class: "btn btn-primary" %>
+                  <% else %>
+                    <%= link_to 'Rent a Product', new_user_order_path(:product_id => product.id), class: "btn btn-primary" %>
+                  <% end %>                    
               </div>
           </div>
       </div>

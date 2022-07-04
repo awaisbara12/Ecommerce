@@ -24,7 +24,22 @@
   <strong>Quantity:</strong>
   <%= @order.quantity %>
 </p>
+<p>
+  <strong>Rent Starting Date:</strong>
+  <%= @order.rentstarted %>
+</p>
+<p>
+  <strong>Rent Ending Date:</strong>
+  <%= @order.rentended %>
+</p>
+<% @product = Product.find(@order.product_id) %>
+<% if @product.ren_order == "rent" %>
+  <p>
+    <strong>Total Rent:</strong>
+    <%= (((@order.rentended - @order.rentstarted)/1.day).round) * @order.price %>
+  </p>
+<% end %>
 
-<%= link_to 'Edit', edit_user_order_path(@order), class: "btn btn-primary" %> 
+<%= link_to 'Edit', edit_user_order_path(@order, :product_id => @order.product_id), class: "btn btn-primary" %> 
 </br>
 <% link_to 'Back', user_orders_path(:user_id=>current_user.id) %>

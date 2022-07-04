@@ -12,6 +12,9 @@
           <br>
           Discription :
           <%= product.Discription %>
+          <br>
+          Rented or Order (Status) :
+          <%= product.ren_order %>
         </p>
         <%= link_to 'Add to Cart', admin_add_to_cart_path(product.id), method: :post, class: "btn btn-primary",remote: true %>
         <br>

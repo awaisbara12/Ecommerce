@@ -36,6 +36,17 @@
                 Quantity : 
                   <%= order.quantity %>
               <br>
+              <% if @product.ren_order == "rent" %>
+                Start Date:
+                  <%= order.rentstarted %>
+                <br>
+                Ending Date:
+                  <%= order.rentended %>
+                <br>
+                Total rent price:
+                <%= (((order.rentended - order.rentstarted)/1.day).round) * order.price %>
+              <%end%>
+              <br>
                 Order Status : 
                   <% if order.status==false %>
                     <%= "Not Confirmed by Admin so you can cancel" %>
@@ -50,6 +61,7 @@
         </div>
       </div>
     <% end %>
+    <%= will_paginate @orders %>
   </div>
 </div>
 

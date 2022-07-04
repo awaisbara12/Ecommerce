@@ -36,6 +36,11 @@
     </div>
 
     <div class="mb-3">
+      <%= form.label :ren_order,class: "form-label" %>
+      <%= form.select :ren_order,Product.ren_orders.keys,class: "form-select" %>
+    </div>
+
+    <div class="mb-3">
       <%= form.label :Discription,class: "form-label" %>
       <%= form.text_field :Discription,class: "form-control" %>
     </div>

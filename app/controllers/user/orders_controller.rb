@@ -6,7 +6,8 @@ class User::OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     # @orders = Order.all
-    @orders = @user.orders
+    # @orders = @user.orders
+    @orders = Order.paginate(:page => params[:page], :per_page => 6)
   end
 
   # GET /orders/1 or /orders/1.json
@@ -28,6 +29,19 @@ class User::OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
+        OrderNotificationMailer.create_order(@order).deliver_now
+        # BaseWorkerJob.perform_async(@order.rentstarted,@order.rentended,@order.id)
+        # BaseWorkerJob.perform_at(@order.rentstarted,@order.rentended,@order)
+
+        # e = DateTime.parse(@order.rentended)
+        # delay_interval1 =DateTime.parse(@order.rentstarted)
+        # puts e.strftime("%H:%M")
+        # puts d.strftime("%H:%M")
+        
+        a = @order.rentended - @order.rentstarted
+        puts "Hello with Time "
+        puts a
+        BaseWorkerJob.perform_in(a,@order.id)
         format.html { redirect_to user_order_url(@order), notice: "Order was successfully created." }
         format.json { render :show, status: :created, location: @order }
       else
@@ -41,6 +55,8 @@ class User::OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
+        OrderNotificationMailer.update_order(@order).deliver_now
+        BaseWorkerJob.perform_async(@order.rentstarted,@order.rentended,@order)
         format.html { redirect_to user_order_url(@order), notice: "Order was successfully updated." }
         format.json { render :show, status: :ok, location: @order }
       else
@@ -53,6 +69,7 @@ class User::OrdersController < ApplicationController
   # DELETE /orders/1 or /orders/1.json
   def destroy
     @category_id=@order.user_id
+    OrderNotificationMailer.delete_order(@order).deliver_now
     @order.destroy
 
     respond_to do |format|
@@ -69,7 +86,7 @@ class User::OrdersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def order_params
-      params.fetch(:order, {}).permit(:user_id, :product_id, :address, :price, :quantity,:email,:status)
+      params.fetch(:order, {}).permit(:user_id, :product_id, :address, :price, :quantity,:email,:status, :rentstarted, :rentended, :Totalrent)
     end
 
     def find_product

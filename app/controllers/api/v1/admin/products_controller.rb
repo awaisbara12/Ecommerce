@@ -98,7 +98,7 @@ class Admin::ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.fetch(:product, {}).permit(:category_id, :product_name, :avatar, :Price, :Discription, :ren_order)
+      params.fetch(:product, {}).permit(:category_id, :product_name, :avatar, :Price, :Discription)
     end
 
     def find_category

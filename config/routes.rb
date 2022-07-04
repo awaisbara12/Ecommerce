@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
 
+
+  require 'sidekiq/web'
+  Rails.application.routes.draw do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   namespace :admin do
     get 'admin_home/home'
   end
   resources :orders
+  resources :create_activations, only: :create
   resources :carts
   resources :products
   post 'products/add_to_cart/:id', to: 'products#add_to_cart', as: 'add_to_cart'
@@ -35,6 +42,14 @@ Rails.application.routes.draw do
     resources :products
     resources :carts 
     resources :orders
+  end
+
+  namespace :api do
+    namespace :v1 do
+      namespace :admin do
+        resources :categories
+      end
+    end
   end
 
   # resources :users
