@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
 
 
+  namespace :chef do
+    get 'dashboard/index'
+  end
   require 'sidekiq/web'
   Rails.application.routes.draw do
+  namespace :chef do
+    get 'dashboard/index'
+  end
     mount Sidekiq::Web => '/sidekiq'
   end
 
@@ -41,7 +47,9 @@ Rails.application.routes.draw do
     resources :categories
     resources :products
     resources :carts 
-    resources :orders
+    resources :orders do
+      get :order_products, on: :collection
+    end
   end
 
   namespace :api do

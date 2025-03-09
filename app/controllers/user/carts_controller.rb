@@ -3,7 +3,7 @@ class User::CartsController < ApplicationController
   before_action :find_user
   # GET /carts or /carts.json
   def index
-    @carts = Cart.all
+    @carts = Cart.where(:user_id => current_user.id).where(:order_id => nil)
   end
 
   # GET /carts/1 or /carts/1.json
@@ -12,11 +12,15 @@ class User::CartsController < ApplicationController
 
   # GET /carts/new
   def new
-    @cart = Cart.new
+    if params[:product_id]
+      @product = Product.find(params[:product_id])
+    end
+    @cart = Cart.new({:product_id => @product.id,:quantity=>1,:total_price=>@product.Price,:user_id=>current_user.id})
   end
 
   # GET /carts/1/edit
   def edit
+    @product = Product.find(@cart.product_id)
   end
 
   # POST /carts or /carts.json

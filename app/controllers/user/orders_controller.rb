@@ -23,6 +23,13 @@ class User::OrdersController < ApplicationController
   def edit
   end
 
+  def order_products
+    debugger
+    @order = Order.create(:user_id => current_user.id)
+    @cart = Cart.where(:user_id => current_user.id).update_all(:order_id => @order.id)
+
+  end
+
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)

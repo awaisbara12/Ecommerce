@@ -11,7 +11,53 @@
     </div>
   <% end %>
 
+  <%if params[:product_id].present? %>
+    <% @product = Product.find(params[:product_id]) %>
+  <%else%>
+    <% @product = Product.find(cart.product_id) %>
+  <%end%>
+
+    <div class="mb-3">
+      <%= form.label :user_id ,class: "form-label"%>
+      <%= form.number_field :user_id ,class: "form-control"%>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :product_id ,class: "form-label"%>
+      <%= form.number_field :product_id ,class: "form-control"%>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :quantity ,class: "form-label"%>
+      <%= form.number_field :quantity ,class: "form-control", id: "quantity"%>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :total_price ,class: "form-label"%>
+      <%= form.number_field :total_price ,class: "form-control", id: "total_price", readonly: true%>
+    </div>
+
+
+
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  console.log("<%= @product.Price %>");
+  document.addEventListener('turbolinks:load', function() {
+    const quantityField = document.getElementById('quantity');
+    const totalPriceField = document.getElementById('total_price');
+
+    // Assuming the price per unit is fixed
+    console.log("<%= @product.Price %>");
+    const pricePerUnit = "<%= @product.Price %>"; // Change this to your actual price per unit
+
+    quantityField.addEventListener('input', function() {
+      const quantity = parseInt(quantityField.value) || 0;
+      const totalPrice = quantity * pricePerUnit;
+      totalPriceField.value = totalPrice.toFixed(2); // Format to 2 decimal places
+    });
+  });
+</script>

@@ -2,11 +2,13 @@
   <h1>Carts</h1>
   <p id="notice"><%= notice %></p>
   <%= link_to("< Back to Categories", {:controller => 'categories',:action => 'index'},class: "btn btn-primary") %>
+  <%= link_to("Confirm Order", order_products_user_orders_path(),class: "btn btn-primary") %>
   <% @count=0 %>
   <% @carts.each do |cart| %>
     <% @count=@count+1 %>
   <%end%>
   <h2>Total Carts : <%= @count %></h2>
+  <h2>Total Price : <%= Cart.where(:user_id => current_user.id ).where(:order_id => nil).sum(:total_price) %></h2>
   <div class="row py-3">
     <% @carts.each do |cart| %>
       <% @product = Product.find(cart.product_id) %>
@@ -19,13 +21,17 @@
             <div class="card-body">
                 <h5 class="card-title"><%= @product.product_name %></h5>
                 <p class="card-text">
-                  Price : 
-                  <%= @product.Price %>
+                  Total Price : 
+                  <%= cart.total_price %>
+                  <br>
+                  Quantity : 
+                  <%= cart.quantity %>
                   <br>
                   Discription : 
                   <%= @product.Discription %>
                 </p>
                   <%= link_to 'Remove from Cart', [:user, cart], method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-primary"%>
+                  <%= link_to 'Edit', edit_user_cart_path(cart) ,class: "btn btn-primary", data: { confirm: "Are you sure you want to edit this cart?" }%></td>
                   <%= link_to 'Order Product', new_user_order_path(:product_id => @product.id), class: "btn btn-primary" %>
             </div>
         </div>

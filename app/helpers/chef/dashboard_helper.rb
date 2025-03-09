@@ -1,0 +1,2 @@
+module Chef::DashboardHelper
+end

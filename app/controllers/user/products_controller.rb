@@ -16,9 +16,9 @@ class User::ProductsController < ApplicationController
     # puts current_user.id
 
     # @cart= @product.id
-    if user_signed_in?
+    # if user_signed_in?
       if @product.avatar.attached?
-        @cart = Cart.create(:user_id=>current_user.id, 
+        @cart = Cart.create(:user_id=>1, 
         :product_id=>@product.id,:category_id=>@category_id, 
         :quantity=>1,:total_price=>@product.Price)
       end
@@ -27,9 +27,9 @@ class User::ProductsController < ApplicationController
         format.html { redirect_to user_products_url(:category_id=>@category_id), notice: "Product is successfully added to cart." }
         format.json { head :no_content }
       end
-    else
-      redirect_to new_user_registration_path
-    end
+    # else
+    #   redirect_to new_user_registration_path
+    # end
     # params.require(:cart).permit(:user_id, :product_id, :category_id, :quantity, :total_price))
 
   end
