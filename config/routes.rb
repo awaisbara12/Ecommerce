@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
 
 
+  namespace :host do
+    resources :dashboards, only: [:index] # Creates GET /host/dashboards
+  end
   namespace :chef do
     get 'dashboard/index'
   end
   require 'sidekiq/web'
   Rails.application.routes.draw do
+    namespace :host do
+      resources :dashboards, only: [:index] do # Creates GET /host/dashboards
+        get :update_status, on: :member
+      end
+    end
   namespace :chef do
     resources :dashboards do
       get :update_order, on: :member 

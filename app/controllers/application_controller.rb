@@ -7,9 +7,12 @@ class ApplicationController < ActionController::Base
             admin_admin_home_home_path
         elsif current_user.present? && current_user.chef?
           chef_dashboards_path
+        elsif current_user.present? && current_user.host?
+          host_dashboards_path
         else
           root_path
         end
+        
       end
 
     protected

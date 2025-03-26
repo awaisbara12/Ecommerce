@@ -1,0 +1,24 @@
+<div class="container-xl container-lg container-md container-sm">
+  <h1 class="row h-100 justify-content-center align-items-center">Host</h1>
+  <h2>Tables: <%= @tables.count %></h2>
+  <div class="row py-3">
+    <% @tables.each do |table| %>
+        <div class="col-md-3 py-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> Table No: <%= table.table_no %> </h5>
+                    <h5 class="card-title"> Seats: <%= table.number %> </h5>
+                    <h5 class="card-title">Status : <%= table.status %> </h5>
+                    <% if table.status == "unoccupied" %>
+                        <%= link_to 'Click Here to Occupied', update_status_host_dashboard_path(:id => table.id, :status=> "occupied"), class: "btn btn-success" %>
+                    <%else%>
+                        <%= link_to 'Click Here to Unoccupied', update_status_host_dashboard_path(:id => table.id, :status => "unoccupied"), class: "btn btn-danger" %>
+                    <%end%>
+                    <br><br>
+                    <%#= link_to 'View Order', chef_dashboard_path(:id => order.id), class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+  </div>
+</div>
