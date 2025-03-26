@@ -24,10 +24,13 @@ class User::OrdersController < ApplicationController
   end
 
   def order_products
-    debugger
     @order = Order.create(:user_id => current_user.id)
-    @cart = Cart.where(:user_id => current_user.id).update_all(:order_id => @order.id)
-
+    @order.price = Cart.where(:user_id => current_user.id ).where(:order_id => nil).sum(:total_price)
+    @order.save
+    @cart = Cart.where(:user_id => current_user.id).where(:order_id => nil).update_all(:order_id => @order.id)
+    respond_to do |format|
+      format.html { redirect_to root_url()}
+    end
   end
 
   # POST /orders or /orders.json

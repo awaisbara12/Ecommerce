@@ -17,14 +17,17 @@
             <%= link_to 'SignIn', new_user_session_path,  class: "navbar-brand" %>
             </li>
         <% end %>
-        <%if user_signed_in? %>
+        <%if user_signed_in? &&  current_user.user? %>
           <li class="nav-item px-1">
-              <%= link_to "Cart: #{Cart.where(:user_id => current_user.id).where(:order_id => nil).count}", user_carts_path(:user_id=>current_user.id),  class: "navbar-brand"%>
+              <%= link_to "Selected Items: #{Cart.where(:user_id => current_user.id).where(:order_id => nil).count}", user_carts_path(:user_id=>current_user.id),  class: "navbar-brand"%>
+          </li>
+          <li class="nav-item px-1">
+              <%= link_to "Ready To Take: #{Order.where(:user_id => current_user.id, :status => "completed").count}", order_completed_user_carts_path(:user_id=>current_user.id),  class: "navbar-brand"%>
           </li>
         <% end %>
         <%if user_signed_in? %>
           <li class="nav-item px-1">
-              <%= link_to 'OrderItem', user_orders_path(:user_id=>current_user.id),  class: "navbar-brand"%>
+              <%#= link_to 'OrderItem', user_orders_path(:user_id=>current_user.id),  class: "navbar-brand"%>
           </li>
         <% end %>
     </ul>

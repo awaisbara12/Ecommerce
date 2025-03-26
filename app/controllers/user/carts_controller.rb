@@ -23,6 +23,20 @@ class User::CartsController < ApplicationController
     @product = Product.find(@cart.product_id)
   end
 
+  def order_completed
+    @orders = Order.where(:user_id => current_user.id, :status => "completed")
+  end
+
+  def order_served
+    # debugger
+    @order = Order.find(params[:id])
+    @order.status = "served"
+    @order.save
+    respond_to do |format|
+      format.html { redirect_to order_completed_user_carts_path()}
+    end
+  end
+
   # POST /carts or /carts.json
   def create
     @cart = Cart.new(cart_params)
@@ -30,7 +44,7 @@ class User::CartsController < ApplicationController
 
     respond_to do |format|
       if @cart.save
-        format.html { redirect_to user_cart_url(@cart), notice: "Cart was successfully created." }
+        format.html { redirect_to user_carts_path(:user_id=>current_user.id) }
         format.json { render :show, status: :created, location: @cart }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +57,7 @@ class User::CartsController < ApplicationController
   def update
     respond_to do |format|
       if @cart.update(cart_params)
-        format.html { redirect_to user_cart_url(@cart,:user_id=>@uid), notice: "Cart was successfully updated." }
+        format.html { redirect_to user_carts_path(:user_id=>current_user.id) }
         format.json { render :show, status: :ok, location: @cart }
       else
         format.html { render :edit, status: :unprocessable_entity }

@@ -1,0 +1,21 @@
+<div class="container-xl container-lg container-md container-sm">
+  <h1>Orders To Served</h1>
+  <% @count=0 %>
+  <h2>Total Orders : <%= @orders.count %></h2>
+  <div class="row py-3">
+    <% @orders.each do |order| %>
+        <div class="col-md-3 py-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> Order No: <%= order.id %></h5>
+                    <h5 class="card-title">Status : 
+                    <%= order.status %>
+                    </h5>
+                    <%= link_to 'Click Here to Served', order_served_user_cart_path(:id => order.id), class: "btn btn-primary" %>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    <% end %>
+  </div>
+</div>

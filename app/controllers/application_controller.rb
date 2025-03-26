@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
     def after_sign_in_path_for(users)
         if current_user.present? && current_user.admin?
             admin_admin_home_home_path
+        elsif current_user.present? && current_user.chef?
+          chef_dashboards_path
         else
           root_path
         end
