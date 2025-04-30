@@ -24,7 +24,7 @@
                   Discription : 
                   <%= @product.Discription %>
                 </p>
-                  <%= link_to 'Destroy', cart, method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-primary"%>
+                  <%= link_to 'Remove', cart, method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-primary"%>
                   <%= link_to 'Order Product', new_order_path(:product_id => @product.id), class: "btn btn-primary" %>
             </div>
         </div>

@@ -16,14 +16,14 @@
           Rented or Order (Status) :
           <%= product.ren_order %>
         </p>
-        <%= link_to 'Add to Cart', admin_add_to_cart_path(product.id), method: :post, class: "btn btn-primary",remote: true %>
+        <%#= link_to 'Add to Cart', admin_add_to_cart_path(product.id), method: :post, class: "btn btn-primary",remote: true %>
         <br>
         <br>
         <% if user_signed_in? %>
-          <% if current_user.role =="admin"%>
+          <% if current_user.role =="admin" || current_user.role =="manager" || current_user.role =="owner"%>
             <%= link_to 'Show', [:admin, product],class: "btn btn-primary", data: { bs_toggle: 'modal', bs_target: '#showProductModal', remote: true} %>
             <%= link_to 'Edit', edit_admin_product_path(product), class: "btn btn-primary" , data: { bs_toggle: 'modal', bs_target: '#editProductModal', remote: true} %>
-            <%= link_to 'Destroy', [:admin, product], method: :delete, data: { confirm: 'Are you sure?' , remote: true },class: "btn btn-primary" %>
+            <%= link_to 'Remove', [:admin, product], method: :delete, data: { confirm: 'Are you sure?' , remote: true },class: "btn btn-primary" %>
           <% end %>
         <% end %>
       </div>

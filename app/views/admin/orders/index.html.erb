@@ -1,67 +1,21 @@
 <div class="container-xl container-lg container-md container-sm">
   <h1>Orders</h1>
-  <p id="notice"><%= notice %></p>
-  <%= link_to '< Admin Home', admin_admin_home_home_path ,class: "btn btn-primary"%>
   <% @count=0 %>
-  <% @orders.each do |order| %>
-    <% @count=@count+1 %>
-  <%end%>
-  <h2>Total Orders : <%= @count %></h2>
+  <h2>Total Orders : <%= @orders.count %></h2>
   <div class="row py-3">
     <% @orders.each do |order| %>
-      
-      <%if order.products.present? %>
-        <% @product = Product.find(order.products.last.id) %>
-      <%else%>
-      <% @product = Product.find(order.product_id) %>
-      <%end%>
-      
-      <div class="col-md-4 py-3">
-        <div class="card">
-          <% if @product.avatar.attached?%>
-            <%= image_tag @product.avatar , width: "200px" %>
-          <%end%>
-              <div class="card-body">
-                  <h5 class="card-title"><%= @product.product_name %></h5>
-                  <p class="card-text">
-                    Price : 
-                      <%= @product.Price %> | 
-                        Total Price : 
-                          <%#= order.quantity*@product.Price %>
-                    <br>
-                      User Mail: 
-                        <%= order.email %>
-                    <br>
-                      Discription : 
-                        <%= @product.Discription %>
-                    <br>
-                      Address : 
-                        <%= order.address %>
-                    <br>
-                      Quantity : 
-                        <%= order.quantity %>
-                    <br>
-                      Order Status : 
-                        <% if order.status==false %>
-                          <%= "Admin do'nt confirmed yet" %>
-                        <%else%>
-                          <%= "Confirmed by Admin" %>
-                        <%end%>
-                  </p>
-                    <% if order.status==false %>
-                      <td><%= link_to 'Cancel Order', [:admin, order], method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-primary"%>
-                    <%end%>
-                    <% if user_signed_in? %>
-                      <% if current_user.role =="admin"%>
-                        <% link_to 'Show', [:admin, order] ,class: "btn btn-primary"%>
-                        <%= link_to 'Edit', edit_admin_order_path(order) ,class: "btn btn-primary"%>
-                      <%end%>
-                    <%end%>
-              </div>
-          </div>
-      </div>
+        <div class="col-md-3 py-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"> Order No: <%= order.id %></h5>
+                    <h5 class="card-title">Status : <%= order.status %></h5>
+                    <h5 class="card-title">Price : <%= order.price %></h5>
+                    <%#= link_to 'Click Here to Complete', update_order_chef_dashboard_path(:id => order.id), class: "btn btn-primary" %>
+                    
+                    <%#= link_to 'View Order', chef_dashboard_path(:id => order.id), class: "btn btn-primary" %>
+                </div>
+            </div>
+        </div>
     <% end %>
   </div>
 </div>
-
-

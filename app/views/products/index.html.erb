@@ -5,7 +5,7 @@
   <br>
   <br>
   <% if user_signed_in? %>
-    <% if current_user.role =="admin"%>
+    <% if current_user.role =="admin" || current_user.role =="manager" || current_user.role =="owner"%>
       <%= link_to 'Add New Product', new_product_path(:category_id => @category.id),class: "btn btn-primary" %>
     <% end %>
   <% end %>
@@ -32,10 +32,10 @@
                   <br>
                   <br>
                   <% if user_signed_in? %>
-                    <% if current_user.role =="admin"%>
+                    <% if current_user.role =="admin" || current_user.role =="manager" || current_user.role =="owner"%>
                       <%= link_to 'Show', product ,class: "btn btn-primary"%>
                       <%= link_to 'Edit', edit_product_path(product),class: "btn btn-primary" %>
-                      <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-primary" %>
+                      <%= link_to 'Remove', product, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-primary" %>
                     <% end %>
                   <% end %>
               </div>

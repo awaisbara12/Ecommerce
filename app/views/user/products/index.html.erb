@@ -23,7 +23,10 @@
                     Rented or Order (Status) :
                     <%= product.ren_order %>
                   </p>
-                  <%= link_to 'Add Dish', new_user_cart_path(:product_id => product.id), class: "btn btn-primary" %>
+                  <% if current_user.present? %>
+                    <%= link_to 'Add Dish', new_user_cart_path(:product_id => product.id), class: "btn btn-primary" %>
+                  <%end%>
+
                   <% if product.ren_order == "orders" %>
                     <%#= link_to 'Order Product', new_user_order_path(:product_id => product.id), class: "btn btn-primary" %>
                   <% else %>
@@ -49,7 +52,7 @@
       <tr>
         <td><% link_to 'Show', [:user, product] %></td>
         <td><% link_to 'Edit', edit_user_product_path(product) %></td>
-        <td><% link_to 'Destroy', [:user, product], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><% link_to 'Remove', [:user, product], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

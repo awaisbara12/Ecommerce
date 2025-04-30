@@ -12,10 +12,10 @@
             <br>
             <br>
             <% if user_signed_in? %>
-                <% if current_user.role =="admin"%>
+                <% if current_user.role =="admin" || current_user.role =="manager" || current_user.role =="owner"%>
                 <%= link_to 'Show', [:admin, category], class: "btn btn-primary" , data: { bs_toggle: 'modal', bs_target: '#showCategoryModal', remote: true} %>
                 <%= link_to 'Edit', edit_admin_category_path(category), class: "btn btn-primary" , data: { bs_toggle: 'modal', bs_target: '#editCategoryModal', remote: true} %>
-                <%= link_to 'Destroy', [:admin, category], method: :delete, data: { confirm: 'Are you sure?' , remote: true }, class: "btn btn-primary" %>
+                <%= link_to 'Remove', [:admin, category], method: :delete, data: { confirm: 'Are you sure?' , remote: true }, class: "btn btn-primary" %>
                 <% end %>
             <% end %>
         </div>

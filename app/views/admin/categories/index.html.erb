@@ -1,11 +1,11 @@
 <div class="container-xl container-lg container-md container-sm">
 
   <h1>Categories</h1>
-  <%= link_to '< Admin Home', admin_admin_home_home_path ,class: "btn btn-primary"%>
+  <%= link_to '< ', admin_admin_home_home_path ,class: "btn btn-primary"%>
   </br>
   </br>
   <% if user_signed_in? %>
-      <% if current_user.role =="admin"%>
+      <% if current_user.role =="admin" || current_user.role =="manager" || current_user.role =="owner"%>
         <%= link_to 'New Category', new_admin_category_path, class: "btn btn-primary" , data: { bs_toggle: 'modal', bs_target: '#newCategoryModal', remote: true} %>
       <% end %>
   <% end %>

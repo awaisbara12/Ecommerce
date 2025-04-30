@@ -50,7 +50,7 @@
       <tr>
         <td><% link_to 'Show', [:user, cart] %></td>
         <td><% link_to 'Edit', edit_user_cart_path(cart) %></td>
-        <td><% link_to 'Destroy', [:user, cart], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><% link_to 'Remove', [:user, cart], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

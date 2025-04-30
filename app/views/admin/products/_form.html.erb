@@ -20,7 +20,7 @@
       </div>
     <%end%>
     
-    <div class="mb-3">
+    <div class="mb-3 d-none">
       <%= form.label :category_id,class: "form-label" %>
       <%= form.number_field :category_id,class: "form-control" %>
     </div>
@@ -35,7 +35,7 @@
       <%= form.number_field :Price,class: "form-control" %>
     </div>
 
-    <div class="mb-3">
+    <div class="mb-3 d-none">
       <%= form.label :ren_order,class: "form-label" %>
       <%= form.select :ren_order,Product.ren_orders.keys,class: "form-select" %>
     </div>

@@ -1,7 +1,7 @@
 <div class="container-xl container-lg container-md container-sm">
   <h1>Categories</h1>
   <% if user_signed_in? %>
-    <% if current_user.role =="admin"%>
+    <% if current_user.role =="admin" || current_user.role =="manager" || current_user.role =="owner"%>
       <%= link_to 'New Category', new_category_path, class: "btn btn-primary"  %>
     <% end %>
   <% end %>
@@ -21,10 +21,10 @@
                   <br>
                   <br>
                   <% if user_signed_in? %>
-                    <% if current_user.role =="admin"%>
+                    <% if current_user.role =="admin" || current_user.role =="manager" || current_user.role =="owner"%>
                       <%= link_to 'Show', category, class: "btn btn-primary" %>
                       <%= link_to 'Edit', edit_category_path(category), class: "btn btn-primary" %>
-                      <%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+                      <%= link_to 'Remove', category, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
                     <% end %>
                   <% end %>
               </div>

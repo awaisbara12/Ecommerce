@@ -1,8 +1,8 @@
 <div class="container-xl container-lg container-md container-sm">
   <p id="notice"><%= notice %></p>
 
-  <%= link_to '< Admin Home', admin_admin_home_home_path ,class: "btn btn-primary"%>
-  <h1>Admin View All Carts</h1>
+  <%= link_to '< Home', admin_admin_home_home_path ,class: "btn btn-primary"%>
+  <h1>View All Carts</h1>
   
   <% @count=0 %>
   <% @carts.each do |cart| %>
@@ -32,7 +32,7 @@
                 </p>
                 <%= link_to 'Show', [:admin, cart] ,class: "btn btn-primary"%>
                 <%= link_to 'Edit', edit_admin_cart_path(cart) ,class: "btn btn-primary"%></td>
-                <%= link_to 'Destroy', [:admin, cart], method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-primary"%></td>
+                <%= link_to 'Remove', [:admin, cart], method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-primary"%></td>
                 
             </div>
         </div>

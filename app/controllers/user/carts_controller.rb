@@ -15,7 +15,7 @@ class User::CartsController < ApplicationController
     if params[:product_id]
       @product = Product.find(params[:product_id])
     end
-    @cart = Cart.new({:product_id => @product.id,:quantity=>1,:total_price=>@product.Price,:user_id=>current_user.id})
+    @cart = Cart.new({:product_id => @product.id,:quantity=>1,:total_price=>@product.Price,:user_id=>current_user.id, :category_id => @product.category_id})
   end
 
   # GET /carts/1/edit
